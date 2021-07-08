@@ -1,58 +1,19 @@
 'use stric'
 //
-//global.host = 'host.docker.internal'; //host.docker.internal
-global.host = {
+global.host = 'host.docker.internal'; //host.docker.internal
+/*global.host = {
   audit: '172.18.1.4',
-  users: '172.18.1.5',
-  merchant: '172.18.1.6',
-  carrier: '172.18.1.7',
-  acopio: '172.18.1.8',
-  productor: '172.18.1.9',
-  traceability: '172.18.1.10'
-};
+  users: '172.18.1.5'
+};*/
 global.port = {
   audit: '3000',
-  users: '3001',
-  merchant: '3002',
-  carrier: '3003',
-  acopio: '3004',
-  productor: '3005',
-  traceability: '3006'
+  users: '3001'
 };
 global.path = {
   audit: '/exec/createUserSC',
   getInitialNonce: '/getInitialNonce',
-  verifyEmail: '/verifyEmail/',
   userLogin: '/login',
-  userCreation: '/userCreation',
-  userRegister: '/register',
-  userDetails: '/userDetails/',
-  usersDetails: '/usersDetails/',
-  userUpdate: '/userUpdate/',
-  userDelete: '/userDelete/',
-  emailToReset: '/emailToReset',
-  resetPassword: '/resetPassword',
-  getData: '/getData',
-  merchantsCompany: '/dataOfCompany',
-  getCompanyM: '/getCompany',
-  merchant: '/merchantsData',
-  carriersCompany: '/dataOfCompany',
-  getCompanyC: '/getCompany',
-  carrier: '/carriersData',
-  acopiosCompany: '/dataOfCompany',
-  getCompanyA: '/getCompany',
-  acopio: '/acopiosData',
-  productorsCompany: '/dataOfCompany',
-  getCompanyP: '/getCompany',
-  productor: '/productorsData',
-  getCompany: '/getCompany',
-  dataOfCompany: '/dataOfCompany',
-  traceability: '/traceability',
-  traceabilityM: '/traceabilityM',
-  traceabilityC: '/traceabilityC',
-  traceabilityA: '/traceabilityA',
-  traceabilityP: '/traceabilityP',
-  getHistory: '/getHistory'
+  userCreation: '/userCreation'
 };
 //
 var createError = require('http-errors');
