@@ -1,0 +1,108 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Avocado Path
+  link(href='/img/pics/logo.png' rel='icon' type='image/png')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  //script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
+  script(src='https://unpkg.com/sweetalert/dist/sweetalert.min.js')
+
+  script(src='https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(href='/css/argon.css?v=1.0.0' rel='stylesheet')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
+  link(href='/css/argon.css?v=1.0.0' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet')
+  link(href='/vendor/nucleo/css/nucleo.css' rel='stylesheet')
+  link(href='/vendor/@fortawesome/fontawesome-free/css/all.min.css' rel='stylesheet')
+.main-content
+  // Navbar
+  nav.navbar.navbar-top.navbar-horizontal.navbar-expand-md.navbar-dark
+    .container.px-4
+      a.navbar-brand(href='http://52.202.214.13')
+        img(src='/img/pics/logo.png')
+      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbar-collapse-main' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbar-collapse-main.collapse.navbar-collapse
+        // Collapse header
+        .navbar-collapse-header.d-md-none
+          .row
+            .col-6.collapse-close
+              button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbar-collapse-main' aria-controls='sidenav-main' aria-expanded='false' aria-label='Toggle sidenav')
+                span
+                span
+        // Navbar items
+        ul.navbar-nav.ml-auto
+          li.nav-item
+            //a.btn.btn-outline-success(type='button' href='./login.html') Iniciar sesi&oacute;n
+          li.nav-item
+            //a.btn.btn-outline-info(type='button' href='./register.html') Registrarse
+  // Header
+  .header.py-6.py-lg-7
+    .container
+      .header-body.text-center.mb-7
+        .row.justify-content-center
+          .col-lg-5.col-md-6
+            h1.text-white
+            p.text-lead.text-light
+  // Page content
+  .container.mt--8.pb-5
+    // Table
+    .row.justify-content-center
+      .col-lg-6.col-md-8
+        .card.bg-secondary.shadow.border-0
+          .card-body.px-lg-5.py-lg-5
+            h1 Reseteo de contraseña
+            form#resetPassword(role='form')
+              .form-group
+                .input-group.input-group-alternative
+                  .input-group-prepend
+                    span.input-group-text
+                      i.ni.ni-lock-circle-open
+                  input#password.form-control(placeholder='Contraseña' type='password' name='password' required='')
+              .form-group
+                .input-group.input-group-alternative
+                  .input-group-prepend
+                    span.input-group-text
+                      i.ni.ni-lock-circle-open
+                  input#password_confirmation.form-control(placeholder='Confirmar contraseña' type='password' name='password_confirmation' required='')
+              .text-center
+                button.btn.btn-primary.mt-4(type='submit') Guardar
+script.
+  $(document).ready(function () {
+    $('#resetPassword').submit(function (e) {
+      e.preventDefault();
+        $.ajax({
+          type: 'put',
+          url: 'http://52.202.214.13:80/resetPassword?code=#{code}&email=#{email}',
+          data: {
+            password: $('#password').val(),
+            password_confirmation: $('#password_confirmation').val()
+            },
+          dataType: 'text',
+        })
+        .done(function(data){
+          var d = jQuery.parseJSON(data);
+          if(d.message == true){
+            swal(
+              "Correcto",
+              "Contraseña cambiada",
+              "success"
+            ).then(function() {
+                window.location.href = "http://52.202.214.13";
+            });
+          }else{
+            swal(
+              "Error",
+              d.message,
+              "info"
+            )
+          }
+        });
+
+    });
+  });
