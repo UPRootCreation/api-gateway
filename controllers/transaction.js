@@ -28,7 +28,7 @@ function serviceInitGetNonce(req, next) {
     next(response.data, null);
   })
   .catch(error => {
-    console.log(error);
+    //console.log(error);
     next(null, error);
   });
 }
@@ -38,7 +38,9 @@ function login(req, res){
     if (err) {
       res.status(500).send({ message: err });
     }else {
-      res.status(200).send({ message: data.message, token: data.token, user: data.user });
+      console.log(data);
+      res.status(200).send({ message: data.message, R: { addTran: data.R.addTran, addCont: data.R.addCont }, dx: data.dx, token: data.token });
+      //res.status(200).send({ message: data.message, token: data.token, user: data.user });
       //console.log(data);
     }
   });
@@ -68,7 +70,9 @@ function userCreation(req, res){
     if (err) {
       res.status(500).send({ message: err });
     }else {
-      if(data.user){
+      if (data.dx) {
+        res.status(200).send({ message: data.message, R: { addTran: data.R.addTran, addCont: data.R.addCont }, dx: data.dx, token: data.token });
+      }else if(data.user){
         res.status(200).send({ message: data.message, A: data.A, token: data.token });
       }else if(data.sessionID){
         res.status(200).send({ message: data.message, sessionID: data.sessionID, token: data.token});
@@ -108,7 +112,7 @@ function serviceInitUserCreationRoot(req, next) {
         next(response.data, null);
     })
     .catch(error => {
-        console.log(error);
+        //console.log(error);
         //console.log(error.response.data.message);
         next(null, error);
     });
